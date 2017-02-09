@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SpringProject</string>
+    <string name="player_score">Player:</string>
+    <string name="comp_score">Computer:</string>
+</resources>
