@@ -42,15 +42,45 @@
         android:layout_centerHorizontal="true"
         />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/points_textview"
+        android:text="Points in Store: "
+        android:textSize="25sp"
+        android:padding="3dp"
+        android:layout_below="@+id/dice_image"
+        android:layout_centerHorizontal="true"
+        />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button"
-        android:layout_below="@id/dice_image"
-        android:layout_centerHorizontal="true"
-        android:text="Change picture"
-        android:onClick="changeDice"
-        />
+        android:id="@+id/reset_button"
+        android:text="Reset"
+        android:onClick="reset"
+        android:layout_toEndOf="@+id/hold_button"
+        android:layout_below="@id/points_textview"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/hold_button"
+        android:text="Hold"
+        android:onClick="hold"
+        android:layout_below="@+id/points_textview"
+        android:layout_alignStart="@+id/player_text_view" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/roll_button"
+        android:text="Roll"
+        android:onClick="roll"
+        android:layout_toStartOf="@+id/hold_button"
+        android:layout_below="@id/points_textview"/>
+
+
 
 
 </RelativeLayout>
