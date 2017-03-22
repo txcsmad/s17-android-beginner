@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "644593211207",
+    "firebase_url": "https://springproject-d74c9.firebaseio.com",
+    "project_id": "springproject-d74c9",
+    "storage_bucket": "springproject-d74c9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:644593211207:android:0b1aaa58faf14923",
+        "android_client_info": {
+          "package_name": "ahn.springproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "644593211207-gjl2d3p0f9lvk38lkho83bsb0uohhkur.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ahn.springproject",
+            "certificate_hash": "972981450672eccf56a9581e631ba0eeacdaebec"
+          }
+        },
+        {
+          "client_id": "644593211207-maj7r3p6mf0ahvgcefo7d0hbcs8jd1ui.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBexUC2zY8b9ylftlqZc18NPkJ942WmJEM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "644593211207-maj7r3p6mf0ahvgcefo7d0hbcs8jd1ui.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
