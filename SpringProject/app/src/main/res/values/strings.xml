@@ -2,7 +2,4 @@
     <string name="app_name">SpringProject</string>
     <string name="player_score">Player:</string>
     <string name="comp_score">Computer:</string>
-    <string name="caption">Enter caption…</string>
-    <string name="take_pic">Take picture</string>
-    <string name="upload">Upload</string>
 </resources>

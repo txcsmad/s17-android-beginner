@@ -20,7 +20,7 @@
         </activity>
         <activity android:name=".ScheduleActivity" />
         <activity android:name=".EventActivity" />
-        <activity android:name=".InfiniteKittens" />
+        <activity android:name=".InfiniteKittens"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -32,8 +32,6 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".ComposeActivity" />
-        <activity android:name=".FeedActivity"></activity>
     </application>
 
 </manifest>
