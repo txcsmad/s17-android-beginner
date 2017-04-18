@@ -5,4 +5,5 @@
     <string name="caption">Enter caption…</string>
     <string name="take_pic">Take picture</string>
     <string name="upload">Upload</string>
+    <string name="compose">Compose</string>
 </resources>

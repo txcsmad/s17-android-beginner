@@ -29,7 +29,7 @@ public class HomeActivity extends AppCompatActivity {
         appList.add("Scarne's Dice");
         appList.add("Schedule App");
         appList.add("Infinite Kittens");
-        appList.add("Compose activity");
+        appList.add("MADGram");
 
         adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.app_list_item, R.id.app_name, appList);
         listView.setAdapter(adapter);
@@ -48,7 +48,7 @@ public class HomeActivity extends AppCompatActivity {
                         intent = new Intent(getApplicationContext(), InfiniteKittens.class);
                         break;
                     case 3:
-                        intent = new Intent(getApplicationContext(), ComposeActivity.class);
+                        intent = new Intent(getApplicationContext(), FeedActivity.class);
                         break;
                 }
                 startActivity(intent);

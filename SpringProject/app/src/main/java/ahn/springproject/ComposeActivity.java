@@ -16,7 +16,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -24,6 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ComposeActivity extends AppCompatActivity {
+    private static final String USER_NAME = "Ali";
 
     ImageView imageView;
     EditText editText;
@@ -34,6 +43,10 @@ public class ComposeActivity extends AppCompatActivity {
     String fileName;
     String caption;
     String timeStamp;
+
+    StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
+    DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("data");
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +82,37 @@ public class ComposeActivity extends AppCompatActivity {
         file = FileProvider.getUriForFile(this, this.getApplicationContext().getPackageName()+".fileprovider", getOutputMediaFile());
         intent.putExtra(MediaStore.EXTRA_OUTPUT, file);
         startActivityForResult(intent, 100);
+    }
+
+    public void upload(View view) {
+        caption = editText.getText().toString();
+
+        if(!caption.equals("")) {
+            timeStamp = new SimpleDateFormat("MM\\dd\\yy hh\\mm\\ss a").format(new Date());
+
+            Uri picture = file;
+
+            StorageReference storageReference = mStorageRef.child(USER_NAME + "/images/"+fileName);
+            storageReference.putFile(picture).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    String url = taskSnapshot.getDownloadUrl().toString();
+
+                    DatabaseReference data = mDatabaseRef.child(timeStamp);
+                    data.child("caption").setValue(caption);
+                    data.child("url").setValue(url);
+                    data.child("user").setValue(USER_NAME);
+                    finish();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(ComposeActivity.this, "Upload Failed", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+        else
+            Toast.makeText(this, "Enter a caption", Toast.LENGTH_SHORT).show();
     }
 
     @Override
