@@ -88,7 +88,7 @@ public class ComposeActivity extends AppCompatActivity {
         caption = editText.getText().toString();
 
         if(!caption.equals("")) {
-            timeStamp = new SimpleDateFormat("MM\\dd\\yy hh\\mm\\ss a").format(new Date());
+            timeStamp = new SimpleDateFormat("MM\\dd\\yy hh:mm:ss a").format(new Date());
 
             Uri picture = file;
 

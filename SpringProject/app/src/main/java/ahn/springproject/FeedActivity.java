@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,11 +15,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class FeedActivity extends AppCompatActivity {
 
@@ -26,6 +31,34 @@ public class FeedActivity extends AppCompatActivity {
 
     ArrayList<String> urls, captions, users, timestamps;
     FeedAdapter adapter;
+    private ValueEventListener eventListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            refresh();
+            for (DataSnapshot timeData: dataSnapshot.getChildren()) {
+                String time = timeData.getKey();
+                timestamps.add(time);
+                for (DataSnapshot userData : timeData.getChildren()) {
+                    String value = userData.getValue(String.class);
+                    if (userData.getKey().equals("caption"))
+                        captions.add(value);
+                    else if (userData.getKey().equals("url"))
+                        urls.add(value);
+                    else
+                        users.add(value);
+                }
+            }
+            Collections.reverse(urls);
+            Collections.reverse(users);
+            Collections.reverse(timestamps);
+            Collections.reverse(captions);
+            adapter.notifyDataSetChanged();
+        }
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+            Log.d("FeedActivity", "Attempt unsuccessful");
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +80,26 @@ public class FeedActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         adapter = new FeedAdapter(this, captions, timestamps, urls, users);
         recyclerView.setAdapter(adapter);
+    }
+
+    public void refresh() {
+        urls.clear();
+        captions.clear();
+        users.clear();
+        timestamps.clear();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refresh();
+        databaseReference.addValueEventListener(eventListener);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        databaseReference.removeEventListener(eventListener);
     }
 
     @Override
